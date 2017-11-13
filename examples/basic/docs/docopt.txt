@@ -1,0 +1,22 @@
+Usage:
+  naval_fate ship new <name>...
+  naval_fate ship <name> move <x> <y> [--speed=<kn>]
+  naval_fate ship shoot <x> <y
+  naval_fate mine (set|remove) <x> <y> [--moored|--drifting]
+  naval_fate -h | --help
+  naval_fate --version
+
+Options:
+  -h, --help
+  -v, --version
+  -speed=<kn>
+  --pipe
+  -r, --roff
+  -5, --html
+  -f, --fragment
+  --manual=<manual>
+  --organization=<name>
+  --date=<date>
+  --style=<module>[,<module>]...
+  -w, --warnings
+  -W

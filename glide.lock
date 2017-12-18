@@ -1,0 +1,10 @@
+hash: 52bbc0838b511212912dbfa38e8a12226e3c51a6bc960601646c200f13609036
+updated: 2017-11-26T11:41:19.609352747-08:00
+imports:
+- name: github.com/docopt/docopt-go
+  version: 784ddc588536785e7299f7272f39101f7faccc3f
+- name: github.com/sergi/go-diff
+  version: 1744e2970ca51c86172c8190fadad617561ed6e7
+- name: gopkg.in/d4l3k/messagediff.v1
+  version: 7b706999d935b04cf2dbc71a5a5afcbd288aeb48
+testImports: []

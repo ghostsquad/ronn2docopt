@@ -1,4 +1,47 @@
 Usage:
-
+  naval_fate ship new <name>...
+  naval_fate ship <name> move <x> <y> [--speed=<kn>]
+  naval_fate ship shoot <x> <y>
+  naval_fate mine (set|remove) <x> <y> [--moored|--drifting]
+  naval_fate -h | --help
+  naval_fate --version
 
 Options:
+These options control whether output is written to file(s), standard output, or
+directly to a man pager.
+
+  -h --help     Show this screen.
+  --version     Show version.
+  --speed=<kn>  Speed in knots [default: 10].
+  --moored      Moored (anchored) mine.
+  --drifting    Drifting mine.
+
+  -h --help     Show this help screen.
+  -v --version  Show version and exit.
+  -speed=<kn>   Speed in knots. [default: [10]
+  --pipe        Don't generateg files, write generated output to standard output.
+
+Format options control the files `ronn` generates, or the output format when the
+`--pipe` argument is specified. When no format options are given, both `--roff`
+and `--html` are assumed.
+
+  -r --roff      Generate roff output.
+  -5 --html      Generate output in HTML format.
+  -f --fragment  Generate output in HTML format but only the document fragment, not the
+
+Document attributes displayed in the header and footer areas of generated
+content are specified with these options. (These values may also be set via
+the [ENVIRONMENT][].)
+
+  --manual=<manual>      The name of the manual this man page belongs to; <manual> is prominently
+  --organization=<name>  The name of the group, organization, or individual responsible for
+  --date=<date>          The document's published date; <date> must be formatted `YYYY-MM-DD` and is
+
+HTML output can be customized through the use of CSS stylesheets:
+
+  --style=<module>[<module>]...  The list of CSS stylesheets to apply to the document.
+
+Miscellaneous options:
+
+  -w --warnings  Show troff warnings on standard error when performing roff conversion.
+  -W             Disable troff warnings.

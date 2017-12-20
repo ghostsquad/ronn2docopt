@@ -22,23 +22,21 @@ func ronn2docopt(ronnFile string) (string, error) {
 		return "", err
 	}
 
-	reader := bufio.NewReader(file)
+	scanner := bufio.NewScanner(file)
 
-	var docoptUsage string
-
-	content, err := libStrings.ReadLines(reader)
+	content, err := libStrings.ReadLines(scanner)
 	if err != nil {
 		return "", err
 	}
 
-	ronn.RonnToDocopt(content)
+	d := ronn.RonnToDocopt(content)
 
-	return strings.TrimSpace(docoptUsage), nil
+	return strings.TrimSpace(d.String()), nil
 }
 
 
 func main() {
-	usage := `Naval Fate.
+	usage := `Ronn2Docopt
 
 Usage:
   ronn2docopt RONNFILE
@@ -49,10 +47,10 @@ Options:
 
 	arguments, _ := docopt.Parse(usage, nil, true, "ronn2docopt 0.1", false)
 
-	usage, err := ronn2docopt(arguments["RONNFILE"].(string))
+	docoptResults, err := ronn2docopt(arguments["RONNFILE"].(string))
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	fmt.Println(usage)
+	fmt.Println(docoptResults)
 }

@@ -3,7 +3,6 @@ package strings
 import (
 	"regexp"
 	"strings"
-	"io"
 	"bufio"
 )
 
@@ -42,21 +41,11 @@ func PadRight(str string, pad string, length int) string {
 	return str + padding
 }
 
-func ReadLines(reader *bufio.Reader) ([]string, error) {
+func ReadLines(scanner *bufio.Scanner) ([]string, error) {
 	var lines []string
-	var err error
 
-	for {
-		line, err := reader.ReadString('\n')
-		lines = append(lines, line)
-
-		if err != nil {
-			break
-		}
-	}
-
-	if err != io.EOF {
-		return lines, err
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
 	}
 
 	return lines, nil

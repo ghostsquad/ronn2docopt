@@ -1,5 +1,4 @@
-ronn(1) -- convert markdown files to manpages
-=============================================
+% ronn(1) -- convert markdown files to manpages
 
 ## SYNOPSIS
 

@@ -8,7 +8,7 @@ import (
 )
 
 type DocOpt struct {
-	Synopsis
+	Synopsis string
 	HelpOptionSections []HelpOptionSection
 }
 
@@ -58,7 +58,7 @@ func (d *DocOpt) String() string {
 
 	buffer.WriteString("Usage:\n")
 
-	buffer.WriteString(d.Body)
+	buffer.WriteString(d.Synopsis)
 	buffer.WriteString("\n\n")
 
 	buffer.WriteString("Options:\n")
@@ -99,11 +99,11 @@ func (d *DocOpt) String() string {
 	return results
 }
 
-func RonnToDocopt(lines []string) *DocOpt {
+func  RonnToDocopt(lines []string) *DocOpt {
 	var d DocOpt
 
 	s := getSection(lines, "SYNOPSIS")
-	d.Body = formatSynopsis(s)
+	d.Synopsis = formatSynopsis(s)
 
 	o := getSection(lines, "OPTIONS")
 

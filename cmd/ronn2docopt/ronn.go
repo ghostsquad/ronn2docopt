@@ -1,8 +1,7 @@
-package ronn
+package main
 
 import (
 	"strings"
-	libStrings "github.com/ghostsquad/ronn2docopt/lib/strings"
 	"bytes"
 	"regexp"
 )
@@ -29,10 +28,10 @@ type HelpOption struct {
 
 var brRe = regexp.MustCompile(`^(.*)\s*(<br>)\s*$`)
 
-var sectionHeaderRe, sectionHeaderMa = libStrings.RegexAndMatchNames(`^##\s+(?P<section>.*)$`)
-var namedOptionRe, namedOptionMa = libStrings.RegexAndMatchNames(`^ {2}\* ` + "`?" + `(?P<name>-.*):$`)
-var defaultValueRe, defaultValueMa = libStrings.RegexAndMatchNames(`^ {4}(?P<before>.*)(?P<default>\[default: .*\]$)`)
-var shortOptionDescRe, shortOptionDescMa = libStrings.RegexAndMatchNames(`^ {4}(?P<short>.*?[.!?]).*$`)
+var sectionHeaderRe, sectionHeaderMa = RegexAndMatchNames(`^##\s+(?P<section>.*)$`)
+var namedOptionRe, namedOptionMa = RegexAndMatchNames(`^ {2}\* ` + "`?" + `(?P<name>-.*):$`)
+var defaultValueRe, defaultValueMa = RegexAndMatchNames(`^ {4}(?P<before>.*)(?P<default>\[default: .*\]$)`)
+var shortOptionDescRe, shortOptionDescMa = RegexAndMatchNames(`^ {4}(?P<short>.*?[.!?]).*$`)
 
 /*
 
@@ -78,7 +77,7 @@ func (d *DocOpt) String() string {
 				padding = longestOptionNameLen + 4
 			}
 
-			on := libStrings.PadRight("  " + o.Name, " ", padding)
+			on := PadRight("  " + o.Name, " ", padding)
 			buffer.WriteString(on)
 			buffer.WriteString(o.Desc)
 
@@ -246,7 +245,7 @@ func newOptionSection(lines []string) *HelpOptionSection {
 // A Section Header is a markdown H2 e.g.
 // ## Foo
 func isSectionHeader(line string) (bool, string) {
-	ma := libStrings.NamedMatches(sectionHeaderRe, sectionHeaderMa, line)
+	ma := NamedMatches(sectionHeaderRe, sectionHeaderMa, line)
 	if len(ma) > 0 {
 		return true, ma["section"]
 	}
@@ -274,7 +273,7 @@ func isSectionDescriptionLine(line string) bool {
 // An Option Declaration looks like this:
 //   * `--help`:
 func isOptionDeclaration(line string) (bool, string) {
-	ma := libStrings.NamedMatches(namedOptionRe, namedOptionMa, line)
+	ma := NamedMatches(namedOptionRe, namedOptionMa, line)
 
 	if len(ma) > 0 {
 		name := strings.Replace(ma["name"], "`", "", -1)
@@ -314,9 +313,9 @@ func formatSynopsis(lines []string) string {
 
 func (option *HelpOption) updateWithLine(line string) {
 	if option.Desc == "" {
-		if ma := libStrings.NamedMatches(shortOptionDescRe, shortOptionDescMa, line); len(ma) > 0 {
+		if ma := NamedMatches(shortOptionDescRe, shortOptionDescMa, line); len(ma) > 0 {
 			option.Desc = strings.TrimSpace(ma["short"])
-		} else if ma := libStrings.NamedMatches(defaultValueRe, defaultValueMa, line); len(ma) > 0 {
+		} else if ma := NamedMatches(defaultValueRe, defaultValueMa, line); len(ma) > 0 {
 			option.Desc = strings.TrimSpace(ma["before"])
 			option.DefaultValue = ma["default"]
 			return
@@ -326,7 +325,7 @@ func (option *HelpOption) updateWithLine(line string) {
 	}
 
 	if option.DefaultValue == "" {
-		ma := libStrings.NamedMatches(defaultValueRe, defaultValueMa, line)
+		ma := NamedMatches(defaultValueRe, defaultValueMa, line)
 		if len(ma) > 0 {
 			option.DefaultValue = ma["default"]
 		}

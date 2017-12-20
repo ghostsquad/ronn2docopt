@@ -6,8 +6,6 @@ import (
 	"os"
 	"strings"
 	"github.com/docopt/docopt-go"
-	"github.com/ghostsquad/ronn2docopt/lib/ronn"
-	libStrings "github.com/ghostsquad/ronn2docopt/lib/strings"
 )
 
 // read ronn file
@@ -24,12 +22,12 @@ func ronn2docopt(ronnFile string) (string, error) {
 
 	scanner := bufio.NewScanner(file)
 
-	content, err := libStrings.ReadLines(scanner)
+	content, err := ReadLines(scanner)
 	if err != nil {
 		return "", err
 	}
 
-	d := ronn.RonnToDocopt(content)
+	d := RonnToDocopt(content)
 
 	return strings.TrimSpace(d.String()), nil
 }

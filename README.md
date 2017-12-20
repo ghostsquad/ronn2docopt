@@ -150,5 +150,5 @@ Make sure you have [glide](https://github.com/Masterminds/glide) installed.
 
 ```
 glide install
-./bin/test # or go test
+go test ./...
 ```

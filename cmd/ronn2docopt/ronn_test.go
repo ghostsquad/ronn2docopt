@@ -1,4 +1,4 @@
-package ronn
+package main
 
 import (
 	"fmt"

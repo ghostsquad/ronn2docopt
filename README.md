@@ -10,7 +10,7 @@ This prints to stdout the [docopt usage string](http://docopt.org/)
 From here, you can embed that usage string as an example by using [go-bindata](https://github.com/shuLhan/go-bindata):
 
 ```
-go run main.go ./examples/basic/docs/thingy.1.ronn > ./examples/basic/docs/docopt.txt
+ronn2docopt ./examples/basic/docs/thingy.1.ronn > ./examples/basic/docs/docopt.txt
 go-bindata --prefix "$(pwd)/examples/basic" -o ./examples/basic/lib/bindata.go ./examples/basic/docs/docopt.txt
 go run ./examples/basic/thingy.go --help
 ```

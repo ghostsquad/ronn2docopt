@@ -351,17 +351,12 @@ func TestDocOpt_String(t *testing.T) {
 				"  naval_fate --version\n" +
 				"\n" +
 				"Options:\n" +
-				"These options control whether output is written to file(s), standard output, or\n" +
-				"directly to a man pager.\n" +
-				"\n" +
 				"  -h --help     Show this screen.\n" +
 				"  --version     Show version.\n" +
 				"  --speed=<kn>  Speed in knots. [default: 10]\n" +
 				"  --foo         Multiline description\n" +
 				"\n" +
 				"Other Options\n" +
-				"These options are for other use #cases\n" +
-				"\n" +
 				"  -b  Thingy [default: baz]"
 
 		if got != want {

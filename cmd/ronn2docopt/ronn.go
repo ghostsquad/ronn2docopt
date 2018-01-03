@@ -16,7 +16,7 @@ type Synopsis struct {
 }
 
 type HelpOptionSection struct {
-	Desc string
+	Name string
 	Options []HelpOption
 }
 
@@ -62,9 +62,9 @@ func (d *DocOpt) String() string {
 
 	buffer.WriteString("Options:\n")
 
-	for _, s := range d.HelpOptionSections {
-		if s.Desc != "" {
-			buffer.WriteString(s.Desc)
+	for i, s := range d.HelpOptionSections {
+		if i > 0 && s.Name != "" {
+			buffer.WriteString(s.Name)
 			buffer.WriteString("\n\n")
 		}
 
@@ -231,13 +231,10 @@ func newOptionSection(lines []string) *HelpOptionSection {
 	}
 
 	// finalize section description
-	var buffer bytes.Buffer
-	for _, line := range sectionDescriptionLines {
-		buffer.WriteString(line)
-		buffer.WriteString("\n")
+	if len(sectionDescriptionLines) > 0 {
+		h.Name = sectionDescriptionLines[0]
 	}
 
-	h.Desc = strings.TrimSpace(buffer.String())
 
 	return h
 }
